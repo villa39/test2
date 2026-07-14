@@ -11,6 +11,7 @@
     --riso-blue: #1D4C8C;
     --riso-yellow: #F2C230;
     --riso-green: #3F5A34;
+    --nav-h: 70px;
 }
 
 * {
@@ -49,6 +50,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 14px 32px;
+    min-height: var(--nav-h);
     background: var(--ink);
     border-bottom: 3px solid var(--riso-red);
     z-index: 1000;
@@ -129,7 +131,8 @@ nav a:hover::after {
 
 .hero {
     position: relative;
-    height: 100vh;
+    margin-top: var(--nav-h);
+    height: calc(100vh - var(--nav-h));
     background:
         linear-gradient(rgba(231, 65, 45, .32), rgba(28, 27, 24, .68)),
         url("images/hero.jpg");
