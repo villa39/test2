@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Villa 39</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600;700&family=Permanent+Marker&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">Villa 39</div>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul id="navLinks">
+            <li><a href="#about">Über die Villa 39</a></li>
+            <li><a href="#support">Unterstützen</a></li>
+            <li><a href="#gallery">Galerie</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+
+    </nav>
+
+   <header class="hero">
+
+    <div class="hero-content">
+
+        <p class="eyebrow">Wir kaufen die</p>
+
+        <h1>Villa 39</h1>
+
+        <p class="subtitle">
+            Helft uns, unsere Villa zu retten!
+        </p>
+
+        <a href="#about" class="button">Mehr erfahren</a>
+
+        <div class="scroll-indicator">
+            ↓
+        </div>
+
+    </div>
+
+    <div class="stamp">Nicht&nbsp;zu<br>verkaufen</div>
+
+</header>
+
+    <div class="torn-edge"></div>
+
+    <main>
+
+        <section id="about">
+
+            <h2>Wir wollen unser Zuhause behalten</h2>
+
+            <div class="about-grid">
+
+                <img src="images/about.jpg" alt="Villa 39">
+
+                <div>
+
+                    <p>
+                        <strong>Situation der Villa</strong>. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                    </p>
+
+                    <p>
+                        <strong>Plan zur Rettung der Villa</strong>. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                    </p>
+
+                    <p>
+                        <strong>Geschichte der Villa, Call to action</strong>. At vero eos et accusam et justo duo dolores et ea rebum.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="support">
+
+            <h2>Wie kann ich helfen?</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Spenden</h3>
+                    <p>Unterstütze uns direkt.</p>
+                    <p>[Link zu Paypal bzw. Bankkonto. Bzw. separate Seite] </p>
+                </div>
+
+                <div class="card">
+                    <h3>Direktkredit</h3>
+                    <p>Leihe uns dein Geld.</p>
+                    <p>[Link zu Direktkredit-Willenserklärung. Bzw. separate Seite]</p>
+                </div>
+
+                <div class="card">
+                    <h3>Spread the word</h3>
+                    <p>Verbreite die Geschichte der Villa.</p>
+                    <p>Link zu Insta, evtl. Share-Knopf und ein paar extra infos, wen wir erreichen w].</p>
+                </div>
+
+            </div>
+
+        </section>
+
+                <section id="gallery">
+
+            <h2>Die Villa</h2>
+            <div class="gallery">
+
+                <img src="images/gallery1.jpg" alt="House">
+
+                <img src="images/gallery2.jpg" alt="Garden">
+
+                <img src="images/gallery3.jpg" alt="Community">
+
+            </div>
+
+        </section>
+
+        <section id="contact">
+
+            <h2>Kontakt</h2>
+
+            <p>Email: info@dievilla39.de</p>
+            <p>Telefon: +49 ...</p>
+            <p>Addresse: ...</p>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>© 2026 Villa 39</p>
+
+    </footer>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburgerBtn.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('is-open');
+            hamburgerBtn.classList.toggle('is-open', isOpen);
+            hamburgerBtn.setAttribute('aria-expanded', isOpen);
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('is-open');
+                hamburgerBtn.classList.remove('is-open');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
