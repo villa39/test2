@@ -298,6 +298,8 @@ h2::after {
 
 .about-grid img {
     width: 45%;
+    height: 380px;
+    object-fit: cover;
     border-radius: 0;
     border: 6px solid var(--paper);
     outline: 2px solid var(--ink);
@@ -327,6 +329,8 @@ h2::after {
 
 .gallery img {
     width: 33.3%;
+    height: 260px;
+    object-fit: cover;
     border-radius: 0;
     border: 6px solid var(--paper);
     outline: 2px solid var(--ink);
@@ -459,6 +463,7 @@ footer {
     .about-grid img,
     .gallery img {
         width: 100%;
+        height: 220px;
         transform: rotate(0deg);
     }
 
