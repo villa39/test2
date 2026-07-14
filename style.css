@@ -383,6 +383,92 @@ h2::after {
 .card:nth-child(2):hover { box-shadow: 10px 10px 0 var(--riso-blue); }
 .card:nth-child(3):hover { box-shadow: 10px 10px 0 var(--riso-green); }
 
+/* ---------- Aktuelles ---------- */
+
+.aktuelles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.aktuelles-item {
+    background: var(--paper-dark);
+    border: 2.5px solid var(--ink);
+    border-left: 8px solid var(--riso-red);
+    padding: 22px 26px;
+}
+
+.aktuelles-item:nth-child(2) {
+    border-left-color: var(--riso-blue);
+}
+
+.aktuelles-item:nth-child(3) {
+    border-left-color: var(--riso-green);
+}
+
+.aktuelles-item:nth-child(3n + 4) {
+    border-left-color: var(--riso-yellow);
+}
+
+.aktuelles-date {
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--riso-red);
+    margin-bottom: 8px;
+}
+
+.aktuelles-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.aktuelles-fallback {
+    font-style: italic;
+    opacity: .75;
+}
+
+/* ---------- Newsletter ---------- */
+
+.newsletter-intro {
+    max-width: 60ch;
+    margin-bottom: 30px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 16px;
+    max-width: 520px;
+}
+
+.newsletter-form input[type="email"] {
+    flex: 1;
+    padding: 13px 16px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .95rem;
+    border: 2.5px solid var(--ink);
+    border-radius: 0;
+    background: var(--paper);
+    color: var(--ink);
+}
+
+.newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--riso-red);
+}
+
+.button--dark {
+    border-color: var(--ink);
+    color: var(--ink);
+    box-shadow: 5px 5px 0 var(--riso-red);
+}
+
+.button--dark:hover {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 7px 7px 0 var(--riso-red);
+}
+
 /* ---------- Contact ---------- */
 
 #contact p {
@@ -473,5 +559,10 @@ footer {
 
     section {
         margin-bottom: 100px;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        max-width: 100%;
     }
 }

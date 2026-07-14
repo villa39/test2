@@ -31,8 +31,10 @@
 
         <ul id="navLinks">
             <li><a href="#about">Über die Villa 39</a></li>
+            <li><a href="#aktuelles">Aktuelles</a></li>
             <li><a href="#support">Unterstützen</a></li>
             <li><a href="#gallery">Galerie</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
             <li><a href="#contact">Kontakt</a></li>
         </ul>
 
@@ -94,6 +96,16 @@
 
         </section>
 
+        <section id="aktuelles">
+
+            <h2>Aktuelles</h2>
+
+            <div class="aktuelles-list" id="aktuellesList">
+                <p class="aktuelles-fallback">Meldungen werden geladen …</p>
+            </div>
+
+        </section>
+
         <section id="support">
 
             <h2>Wie kann ich helfen?</h2>
@@ -137,6 +149,28 @@
 
         </section>
 
+        <section id="newsletter">
+
+            <h2>Newsletter</h2>
+
+            <p class="newsletter-intro">
+                Trag dich ein, um Neuigkeiten rund um die Villa 39 direkt per E-Mail zu bekommen.
+            </p>
+
+            <!--
+                Formular ist aktuell nur Optik. Sobald ihr einen
+                Newsletter-Anbieter (z. B. Brevo, CleverReach) habt:
+                - action="..." auf die Anmelde-URL des Anbieters setzen
+                - method sowie den name des Eingabefelds gemäß Anbieter anpassen
+                - ggf. ein verstecktes Feld (Listen-ID o.ä.) ergänzen
+            -->
+            <form class="newsletter-form" action="#" method="post">
+                <input type="email" name="email" placeholder="deine@email.de" required aria-label="E-Mail-Adresse">
+                <button type="submit" class="button button--dark">Eintragen</button>
+            </form>
+
+        </section>
+
         <section id="contact">
 
             <h2>Kontakt</h2>
@@ -172,6 +206,42 @@
                 hamburgerBtn.setAttribute('aria-expanded', 'false');
             });
         });
+
+        // Aktuelles: Meldungen aus news.json laden und anzeigen.
+        // Neue Meldung hinzufügen = einfach neuen Eintrag in news.json ergänzen.
+        const aktuellesList = document.getElementById('aktuellesList');
+
+        fetch('news.json')
+            .then(res => {
+                if (!res.ok) throw new Error('news.json nicht gefunden');
+                return res.json();
+            })
+            .then(items => {
+                aktuellesList.innerHTML = '';
+
+                items
+                    .slice()
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .forEach(item => {
+                        const entry = document.createElement('article');
+                        entry.className = 'aktuelles-item';
+
+                        const formattedDate = new Date(item.date).toLocaleDateString('de-DE', {
+                            day: '2-digit', month: 'long', year: 'numeric'
+                        });
+
+                        entry.innerHTML = `
+                            <p class="aktuelles-date">${formattedDate}</p>
+                            <h3>${item.title}</h3>
+                            <p>${item.text}</p>
+                        `;
+
+                        aktuellesList.appendChild(entry);
+                    });
+            })
+            .catch(() => {
+                aktuellesList.innerHTML = '<p class="aktuelles-fallback">Aktuell keine Meldungen. (Hinweis: news.json muss über einen Server ausgeliefert werden, nicht per Doppelklick geöffnet.)</p>';
+            });
     </script>
 
 </body>
