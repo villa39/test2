@@ -325,11 +325,12 @@ h2::after {
 
 .gallery {
     display: flex;
+    flex-wrap: wrap;
     gap: 24px;
 }
 
 .gallery img {
-    width: 33.3%;
+    width: calc(33.3% - 16px);
     height: 260px;
     object-fit: cover;
     border-radius: 0;
