@@ -60,6 +60,7 @@ nav {
     color: var(--paper);
     font-size: 1.15rem;
     letter-spacing: .5px;
+    text-decoration: none;
 }
 
 nav ul {
@@ -383,31 +384,36 @@ h2::after {
 .card:nth-child(2):hover { box-shadow: 10px 10px 0 var(--riso-blue); }
 .card:nth-child(3):hover { box-shadow: 10px 10px 0 var(--riso-green); }
 
+.card-link {
+    display: inline-block;
+    color: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid currentColor;
+}
+
+.card:nth-child(3) .card-link {
+    color: var(--riso-green);
+}
+
+.card-link:hover {
+    opacity: .75;
+}
+
 /* ---------- Aktuelles ---------- */
 
 .aktuelles-list {
     display: flex;
     flex-direction: column;
-    gap: 22px;
 }
 
 .aktuelles-item {
-    background: var(--paper-dark);
-    border: 2.5px solid var(--ink);
-    border-left: 8px solid var(--riso-red);
-    padding: 22px 26px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--ink);
 }
 
-.aktuelles-item:nth-child(2) {
-    border-left-color: var(--riso-blue);
-}
-
-.aktuelles-item:nth-child(3) {
-    border-left-color: var(--riso-green);
-}
-
-.aktuelles-item:nth-child(3n + 4) {
-    border-left-color: var(--riso-yellow);
+.aktuelles-item:first-child {
+    padding-top: 0;
 }
 
 .aktuelles-date {
@@ -415,12 +421,12 @@ h2::after {
     text-transform: uppercase;
     letter-spacing: .08em;
     color: var(--riso-red);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .aktuelles-item h3 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
 }
 
 .aktuelles-fallback {
@@ -485,6 +491,20 @@ footer {
     font-size: .85rem;
     letter-spacing: .04em;
     border-top: 3px solid var(--riso-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer-social {
+    color: var(--paper);
+    display: inline-flex;
+    transition: color .2s ease;
+}
+
+.footer-social:hover {
+    color: var(--riso-yellow);
 }
 
 /* ---------- Responsive ---------- */
