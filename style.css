@@ -294,7 +294,7 @@ h2::after {
 .about-grid {
     display: flex;
     gap: 50px;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .about-grid img {
