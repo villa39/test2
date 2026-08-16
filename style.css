@@ -123,9 +123,11 @@ nav ul > li.has-submenu::after {
     z-index: 1001;
 }
 
-li.has-submenu:hover > .submenu,
-li.has-submenu:focus-within > .submenu {
-    display: block;
+@media (min-width: 801px) {
+    li.has-submenu:hover > .submenu,
+    li.has-submenu:focus-within > .submenu {
+        display: block;
+    }
 }
 
 .submenu li {
@@ -230,6 +232,12 @@ li.has-submenu:focus-within > .submenu {
     margin-top: 60px;
     font-size: 2rem;
     opacity: .7;
+}
+
+@media (min-width: 801px) {
+    .hero {
+        background-position: center 25%;
+    }
 }
 
 .button {
@@ -589,6 +597,17 @@ h2::after {
     font-size: .9rem;
     border-top: 1px solid var(--ink);
     padding-top: 24px;
+}
+
+.subpage-image {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    border: 6px solid var(--paper);
+    outline: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--riso-blue);
+    margin-bottom: 40px;
+    display: block;
 }
 
 .qr-placeholder {
