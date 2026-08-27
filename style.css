@@ -515,6 +515,23 @@ h2::after {
 .card:nth-child(2):hover { box-shadow: 10px 10px 0 var(--riso-blue); }
 .card:nth-child(3):hover { box-shadow: 10px 10px 0 var(--riso-green); }
 
+.card-arrow {
+    display: block;
+    margin-top: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid currentColor;
+    width: fit-content;
+}
+
+.card:nth-child(1) .card-arrow { color: var(--riso-red); }
+.card:nth-child(2) .card-arrow { color: var(--riso-blue); }
+.card:nth-child(3) .card-arrow { color: var(--riso-green); }
+
+.card:hover .card-arrow {
+    opacity: .75;
+}
+
 /* ---------- Aktuelles ---------- */
 
 .aktuelles-list {
