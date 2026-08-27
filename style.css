@@ -376,6 +376,10 @@ h2::after {
     color: var(--riso-red);
 }
 
+.about-cta {
+    margin-top: 12px;
+}
+
 .inline-link {
     color: var(--riso-red);
     text-decoration: none;
