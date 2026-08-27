@@ -487,6 +487,9 @@ h2::after {
     flex: 1;
     box-shadow: 6px 6px 0 var(--ink);
     transition: transform .18s ease, box-shadow .18s ease;
+    display: block;
+    color: inherit;
+    text-decoration: none;
 }
 
 .card:nth-child(1) { border-color: var(--riso-red); box-shadow: 6px 6px 0 var(--riso-red); }
@@ -510,19 +513,20 @@ h2::after {
 .card:nth-child(2):hover { box-shadow: 10px 10px 0 var(--riso-blue); }
 .card:nth-child(3):hover { box-shadow: 10px 10px 0 var(--riso-green); }
 
-.card-link {
-    display: inline-block;
-    color: inherit;
+.card-arrow {
+    display: block;
+    margin-top: 16px;
     font-weight: 600;
     text-decoration: none;
     border-bottom: 2px solid currentColor;
+    width: fit-content;
 }
 
-.card:nth-child(3) .card-link {
-    color: var(--riso-green);
-}
+.card:nth-child(1) .card-arrow { color: var(--riso-red); }
+.card:nth-child(2) .card-arrow { color: var(--riso-blue); }
+.card:nth-child(3) .card-arrow { color: var(--riso-green); }
 
-.card-link:hover {
+.card:hover .card-arrow {
     opacity: .75;
 }
 
@@ -553,6 +557,18 @@ h2::after {
 .aktuelles-item h3 {
     font-size: 1.05rem;
     margin-bottom: 6px;
+}
+
+.aktuelles-event-date {
+    display: inline-block;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--riso-yellow);
+    padding: 4px 10px;
+    margin-bottom: 10px;
 }
 
 .aktuelles-fallback {
