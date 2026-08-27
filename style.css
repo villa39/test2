@@ -412,6 +412,62 @@ h2::after {
     transform: rotate(2deg);
 }
 
+/* ---------- Geschichte & Finanzierung (Text/Bild-Mischung) ---------- */
+
+#geschichte, #finanzierung {
+    scroll-margin-top: 100px;
+}
+
+.story-lead {
+    font-size: 1.2rem;
+    max-width: 75ch;
+    margin-bottom: 50px;
+}
+
+.story-row {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.story-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.story-row img {
+    width: 42%;
+    flex-shrink: 0;
+    height: auto;
+    border: 6px solid var(--paper);
+    outline: 2px solid var(--ink);
+    transform: rotate(-2deg);
+}
+
+.story-row.reverse img {
+    transform: rotate(2deg);
+}
+
+.story-row.c-red img { box-shadow: 8px 8px 0 var(--riso-red); }
+.story-row.c-blue img { box-shadow: 8px 8px 0 var(--riso-blue); }
+.story-row.c-green img { box-shadow: 8px 8px 0 var(--riso-green); }
+
+.story-row p {
+    flex: 1;
+}
+
+.story-pullquote {
+    font-family: "Archivo Black", sans-serif;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    line-height: 1.35;
+    color: var(--riso-red);
+    border-left: 6px solid var(--riso-red);
+    padding-left: 26px;
+    margin: 50px 0;
+    max-width: 68ch;
+}
+
 /* ---------- Cards ---------- */
 
 .cards {
@@ -746,12 +802,18 @@ footer a:not(.footer-social):hover {
 
     .about-grid,
     .gallery,
-    .cards {
+    .cards,
+    .story-row {
+        flex-direction: column;
+    }
+
+    .story-row.reverse {
         flex-direction: column;
     }
 
     .about-grid img,
-    .gallery img {
+    .gallery img,
+    .story-row img {
         width: 100%;
         height: auto;
         transform: rotate(0deg);
