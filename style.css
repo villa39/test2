@@ -719,6 +719,95 @@ h2::after {
     padding-top: 24px;
 }
 
+/* ---------- Legal-Dokument (Datenschutzerklärung) ---------- */
+
+.legal-content a {
+    color: var(--riso-red);
+    text-decoration: none;
+    border-bottom: 1px solid var(--riso-red);
+}
+
+.legal-content a:visited {
+    color: var(--riso-red);
+}
+
+.legal-content a:hover {
+    opacity: .75;
+}
+
+.legal-content h3 {
+    font-size: 1.1rem;
+    margin: 30px 0 14px;
+}
+
+.legal-content .index {
+    list-style: none;
+    columns: 2;
+    column-gap: 30px;
+    max-width: 65ch;
+    margin: 30px 0 50px;
+    font-size: .88rem;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--ink);
+}
+
+.legal-content .index li {
+    margin-bottom: 10px;
+    break-inside: avoid;
+}
+
+.legal-content .index-link {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--paper-dark);
+}
+
+.legal-content .index-link:hover {
+    border-bottom-color: var(--riso-red);
+    color: var(--riso-red);
+}
+
+.legal-content .m-elements,
+.legal-content .glossary {
+    list-style: none;
+    max-width: 70ch;
+    margin: 16px 0 28px;
+}
+
+.legal-content .m-elements > li,
+.legal-content .glossary > li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-size: .9rem;
+    line-height: 1.65;
+}
+
+.legal-content .m-elements > li:first-child,
+.legal-content .glossary > li:first-child {
+    padding-top: 0;
+}
+
+.legal-content strong {
+    color: var(--riso-red);
+}
+
+.legal-content .seal {
+    margin-top: 60px;
+    font-size: .78rem;
+    opacity: .55;
+}
+
+.legal-content .seal a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+    .legal-content .index {
+        columns: 1;
+    }
+}
+
 .subpage-image {
     width: 100%;
     max-width: 560px;
