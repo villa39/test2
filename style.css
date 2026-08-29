@@ -81,6 +81,10 @@ nav a {
     position: relative;
 }
 
+nav a:visited {
+    color: var(--paper);
+}
+
 nav a::after {
     content: "";
     position: absolute;
@@ -392,6 +396,10 @@ h2::after {
     opacity: .75;
 }
 
+.inline-link:visited {
+    color: var(--riso-red);
+}
+
 /* ---------- Gallery ---------- */
 
 .gallery {
@@ -494,6 +502,10 @@ h2::after {
     text-decoration: none;
 }
 
+.card:visited {
+    color: var(--ink);
+}
+
 .card:nth-child(1) { border-color: var(--riso-red); box-shadow: 6px 6px 0 var(--riso-red); }
 .card:nth-child(2) { border-color: var(--riso-blue); box-shadow: 6px 6px 0 var(--riso-blue); }
 .card:nth-child(3) { border-color: var(--riso-green); box-shadow: 6px 6px 0 var(--riso-green); }
@@ -587,9 +599,12 @@ h2::after {
 }
 
 .newsletter-form {
+    max-width: 520px;
+}
+
+.newsletter-row {
     display: flex;
     gap: 16px;
-    max-width: 520px;
 }
 
 .newsletter-form input[type="email"] {
@@ -606,6 +621,46 @@ h2::after {
 .newsletter-form input[type="email"]:focus {
     outline: none;
     border-color: var(--riso-red);
+}
+
+.newsletter-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 16px;
+    font-size: .85rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.newsletter-consent input[type="checkbox"] {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--riso-red);
+}
+
+.newsletter-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.newsletter-iframe-hidden {
+    display: none;
+}
+
+.newsletter-success {
+    max-width: 520px;
+    padding: 18px 22px;
+    background: var(--paper-dark);
+    border: 2.5px solid var(--riso-green);
+    border-left-width: 8px;
+    font-size: .95rem;
+    line-height: 1.6;
 }
 
 .button--dark {
@@ -737,6 +792,10 @@ footer {
     transition: color .2s ease;
 }
 
+.footer-social:visited {
+    color: var(--paper);
+}
+
 .footer-social:hover {
     color: var(--riso-yellow);
 }
@@ -744,6 +803,10 @@ footer {
 footer a:not(.footer-social) {
     color: var(--paper);
     transition: color .2s ease;
+}
+
+footer a:not(.footer-social):visited {
+    color: var(--paper);
 }
 
 footer a:not(.footer-social):hover {
@@ -851,7 +914,10 @@ footer a:not(.footer-social):hover {
     }
 
     .newsletter-form {
-        flex-direction: column;
         max-width: 100%;
+    }
+
+    .newsletter-row {
+        flex-direction: column;
     }
 }
