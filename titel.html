@@ -4,25 +4,24 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Villa 39 – Export</title>
+<title>Villa 39 – SVG Export</title>
 
 
-<!-- ============================================================
-     EXAKT DIE SCHRIFTART DER ORIGINAL-WEBSITE
-     ============================================================ -->
+<!-- =========================================================
+     GOOGLE FONT
+     ========================================================= -->
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
 
 <link rel="preconnect"
       href="https://fonts.gstatic.com"
       crossorigin>
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600;700&family=Permanent+Marker&display=swap"
-    rel="stylesheet"
->
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap"
+    rel="stylesheet">
 
 
 <style>
@@ -41,13 +40,13 @@ body {
 
     min-height: 100vh;
 
+    padding: 40px;
+
     background: #333;
 
     color: white;
 
     font-family: Arial, sans-serif;
-
-    padding: 30px;
 
 }
 
@@ -61,26 +60,27 @@ h1 {
 
 #status {
 
-    font-family: monospace;
-
     margin-bottom: 25px;
+
+    font-family: monospace;
 
 }
 
 
-/* ============================================================
+/* =========================================================
    TRANSPARENZ-VORSCHAU
-   ============================================================ */
+   ========================================================= */
 
 #preview {
 
     display: inline-block;
 
-    padding: 30px;
+    padding: 40px;
 
-    max-width: calc(100vw - 60px);
+    max-width: calc(100vw - 80px);
 
     overflow: auto;
+
 
     background-color: white;
 
@@ -110,25 +110,25 @@ h1 {
             #ccc 75%
         );
 
-    background-size: 30px 30px;
+    background-size: 32px 32px;
 
     background-position:
 
         0 0,
-        0 15px,
-        15px -15px,
-        -15px 0;
+        0 16px,
+        16px -16px,
+        -16px 0;
 
 }
 
 
-#preview img {
+#preview svg {
 
     display: block;
 
     width: min(
-        1200px,
-        calc(100vw - 120px)
+        1000px,
+        calc(100vw - 160px)
     );
 
     height: auto;
@@ -144,27 +144,19 @@ button {
 
     padding: 14px 24px;
 
-    border: none;
+    border: 0;
 
     background: #E7412D;
 
     color: white;
 
-    font-weight: bold;
-
     font-size: 16px;
+
+    font-weight: bold;
 
     cursor: pointer;
 
 }
-
-
-button:hover {
-
-    background: #1D4C8C;
-
-}
-
 
 button:disabled {
 
@@ -182,9 +174,7 @@ button:disabled {
 <body>
 
 
-<h1>
-    Villa 39 – 10.000px Export
-</h1>
+<h1>Villa 39 — SVG</h1>
 
 
 <div id="status">
@@ -196,25 +186,20 @@ button:disabled {
 
 
 <button id="download" disabled>
-    PNG herunterladen
+    SVG herunterladen
 </button>
 
 
 <script>
 
 
-/* ============================================================
-   KONFIGURATION
-   ============================================================ */
+/* =========================================================
+   ORIGINALWERTE AUS DEINEM HERO
+   ========================================================= */
 
 const TEXT = "Villa 39";
 
-const OUTPUT_WIDTH = 10000;
-
-
-/*
- * EXAKTE FARBEN AUS DEINEM ORIGINAL-CSS
- */
+const FONT = "Archivo Black";
 
 const MAIN_COLOR = "#F1ECDD";
 
@@ -224,42 +209,20 @@ const BLUE = "#1D4C8C";
 
 
 /*
- * ============================================================
- * SCHLAGSCHATTEN
- * ============================================================
- *
- * Original deiner Website:
+ * Dein ursprünglicher CSS-Schatten:
  *
  * text-shadow:
  *     4px 4px 0 var(--riso-red),
  *    -2px -2px 0 var(--riso-blue);
  *
- * Für den Export etwas kompakter:
- *
- * Rot:  3px
- * Blau: 1.5px
- *
- * Die Werte werden anschließend proportional
- * zur tatsächlichen Schriftgröße hochskaliert.
+ * Diese Werte werden hier proportional zur Schriftgröße
+ * skaliert.
  */
 
-const RED_OFFSET = 3;
 
-const BLUE_OFFSET = 1.5;
-
-
-/*
- * Referenz-Schriftgröße.
- *
- * Alle Schatten werden relativ dazu berechnet.
- */
-
-const REFERENCE_FONT_SIZE = 100;
-
-
-/* ============================================================
+/* =========================================================
    STATUS
-   ============================================================ */
+   ========================================================= */
 
 const status =
     document.getElementById("status");
@@ -272,107 +235,53 @@ function setStatus(text) {
 }
 
 
-/* ============================================================
-   GOOGLE FONT LADEN
-   ============================================================ */
+/* =========================================================
+   AUF FONT WARTEN
+   ========================================================= */
 
-async function waitForFont() {
+async function loadArchivo() {
 
     setStatus(
-        "Lade Archivo Black von Google Fonts …"
+        "Warte auf Archivo Black …"
     );
 
 
     /*
-     * Warten bis alle Webfonts fertig geladen sind.
+     * Erst warten, bis alle @font-face-Regeln
+     * fertig verarbeitet sind.
      */
 
     await document.fonts.ready;
 
 
     /*
-     * Archivo Black explizit anfordern.
+     * Archivo Black explizit laden.
      */
 
     await document.fonts.load(
-        '900 100px "Archivo Black"'
+        '900 200px "Archivo Black"'
     );
 
+
+    /*
+     * Noch einmal warten.
+     */
 
     await document.fonts.ready;
 
 
     /*
-     * Prüfen, ob der Font tatsächlich verfügbar ist.
+     * Prüfen.
      */
 
     if (
         !document.fonts.check(
-            '900 100px "Archivo Black"'
+            '900 200px "Archivo Black"'
         )
     ) {
 
         throw new Error(
             "Archivo Black konnte nicht geladen werden."
-        );
-
-    }
-
-
-    /*
-     * Zusätzliches echtes DOM-Mess-Element.
-     *
-     * Damit stellen wir sicher, dass der Browser
-     * die Schrift tatsächlich für Layout verwendet.
-     */
-
-    const test =
-        document.createElement("span");
-
-
-    test.style.position =
-        "absolute";
-
-    test.style.left =
-        "-99999px";
-
-    test.style.top =
-        "-99999px";
-
-    test.style.fontFamily =
-        '"Archivo Black", sans-serif';
-
-    test.style.fontWeight =
-        "900";
-
-    test.style.fontSize =
-        "100px";
-
-    test.style.whiteSpace =
-        "nowrap";
-
-    test.textContent =
-        TEXT;
-
-
-    document.body.appendChild(test);
-
-
-    const rect =
-        test.getBoundingClientRect();
-
-
-    const width =
-        rect.width;
-
-
-    document.body.removeChild(test);
-
-
-    if (width < 100) {
-
-        throw new Error(
-            "Die Schrift wurde nicht korrekt gerendert."
         );
 
     }
@@ -385,541 +294,402 @@ async function waitForFont() {
 }
 
 
-/* ============================================================
-   SVG ERZEUGEN
-   ============================================================ */
+/* =========================================================
+   SCHRIFT MESSEN
+   ========================================================= */
 
-function createSVG() {
+function measureText() {
+
+    const canvas =
+        document.createElement("canvas");
 
 
-    /*
-     * Wir verwenden eine Referenzgröße.
-     *
-     * Das SVG wird später verlustfrei auf 10.000px
-     * hochskaliert.
-     */
-
-    const FONT_SIZE =
-        REFERENCE_FONT_SIZE;
+    const ctx =
+        canvas.getContext("2d");
 
 
     /*
-     * Unsichtbares Mess-Element.
+     * Große Referenzgröße.
      */
 
-    const measure =
-        document.createElement("span");
+    const fontSize = 1000;
 
 
-    measure.style.position =
-        "absolute";
+    ctx.font =
+        `900 ${fontSize}px "${FONT}"`;
 
-    measure.style.left =
-        "-99999px";
 
-    measure.style.top =
-        "-99999px";
-
-    measure.style.fontFamily =
-        '"Archivo Black", sans-serif';
-
-    measure.style.fontWeight =
-        "900";
-
-    measure.style.fontSize =
-        FONT_SIZE + "px";
-
-    measure.style.lineHeight =
-        "1";
-
-    measure.style.whiteSpace =
-        "nowrap";
-
-    measure.textContent =
-        TEXT;
-
-
-    document.body.appendChild(measure);
-
-
-    const rect =
-        measure.getBoundingClientRect();
-
-
-    const textWidth =
-        rect.width;
-
-
-    const textHeight =
-        rect.height;
-
-
-    document.body.removeChild(measure);
-
-
-    /*
-     * Falls aus irgendeinem Grund keine Schrift
-     * gemessen wurde.
-     */
-
-    if (textWidth <= 0) {
-
-        throw new Error(
-            "Text konnte nicht gemessen werden."
-        );
-
-    }
-
-
-    /*
-     * Großzügiger Rand.
-     */
-
-    const padding = 25;
-
-
-    /*
-     * Gesamtabmessungen.
-     */
-
-    const svgWidth =
-        textWidth
-        +
-        padding * 2
-        +
-        Math.abs(BLUE_OFFSET)
-        +
-        RED_OFFSET;
-
-
-    const svgHeight =
-        textHeight
-        +
-        padding * 2
-        +
-        RED_OFFSET
-        +
-        Math.abs(BLUE_OFFSET);
-
-
-    /*
-     * ========================================================
-     * SVG
-     * ========================================================
-     *
-     * KEIN Hintergrund-Element!
-     *
-     * Dadurch bleibt alles außerhalb des Textes
-     * vollständig transparent.
-     */
-
-    const svg = `
-
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-
-    width="${svgWidth}"
-
-    height="${svgHeight}"
-
-    viewBox="0 0 ${svgWidth} ${svgHeight}"
-
->
-
-
-    <!-- =====================================================
-         BLAUER SCHATTEN
-         ===================================================== -->
-
-    <text
-
-        x="${padding - BLUE_OFFSET}"
-
-        y="${padding + textHeight - BLUE_OFFSET}"
-
-        font-family="Archivo Black"
-
-        font-weight="900"
-
-        font-size="${FONT_SIZE}px"
-
-        fill="${BLUE}"
-
-    >${TEXT}</text>
-
-
-    <!-- =====================================================
-         ROTER SCHATTEN
-         ===================================================== -->
-
-    <text
-
-        x="${padding + RED_OFFSET}"
-
-        y="${padding + textHeight + RED_OFFSET}"
-
-        font-family="Archivo Black"
-
-        font-weight="900"
-
-        font-size="${FONT_SIZE}px"
-
-        fill="${RED}"
-
-    >${TEXT}</text>
-
-
-    <!-- =====================================================
-         HAUPTTEXT
-         ===================================================== -->
-
-    <text
-
-        x="${padding}"
-
-        y="${padding + textHeight}"
-
-        font-family="Archivo Black"
-
-        font-weight="900"
-
-        font-size="${FONT_SIZE}px"
-
-        fill="${MAIN_COLOR}"
-
-    >${TEXT}</text>
-
-
-</svg>
-
-`;
+    const metrics =
+        ctx.measureText(TEXT);
 
 
     return {
 
-        svg,
+        width:
+            metrics.width,
 
-        width: svgWidth,
+        ascent:
+            metrics.actualBoundingBoxAscent,
 
-        height: svgHeight
+        descent:
+            metrics.actualBoundingBoxDescent
 
     };
 
 }
 
 
-/* ============================================================
-   SVG → 10.000px PNG
-   ============================================================ */
+/* =========================================================
+   SVG ERZEUGEN
+   ========================================================= */
 
-async function renderPNG() {
-
-
-    setStatus(
-        "Erzeuge hochauflösenden Schriftzug …"
-    );
+function createSVG() {
 
 
-    const result =
-        createSVG();
+    const metrics =
+        measureText();
 
 
     /*
-     * SVG als Blob.
-     */
-
-    const blob =
-        new Blob(
-
-            [result.svg],
-
-            {
-                type:
-                    "image/svg+xml;charset=utf-8"
-            }
-
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    /*
-     * SVG laden.
-     */
-
-    const image =
-        new Image();
-
-
-    image.decoding =
-        "async";
-
-
-    image.src =
-        url;
-
-
-    await new Promise(
-        (resolve, reject) => {
-
-            image.onload =
-                resolve;
-
-            image.onerror =
-                reject;
-
-        }
-    );
-
-
-    /*
-     * ========================================================
+     * =====================================================
      * ZIELGRÖSSE
-     * ========================================================
+     * =====================================================
+     *
+     * SVG wird ungefähr 3000px breit.
+     *
+     * Da SVG Vektor ist, ist die konkrete Pixelgröße
+     * später ohnehin beliebig skalierbar.
+     */
+
+    const targetWidth = 3000;
+
+
+    /*
+     * 1000px Referenzschrift → gewünschte Breite.
      */
 
     const scale =
-        OUTPUT_WIDTH /
-        result.width;
+        targetWidth /
+        metrics.width;
 
 
-    const outputHeight =
-        Math.ceil(
-            result.height * scale
-        );
-
-
-    /*
-     * 10.000px Canvas.
-     */
-
-    const canvas =
-        document.createElement("canvas");
-
-
-    canvas.width =
-        OUTPUT_WIDTH;
-
-
-    canvas.height =
-        outputHeight;
+    const fontSize =
+        1000 * scale;
 
 
     /*
-     * Transparenter Canvas.
+     * Schatten proportional zur Originalgröße.
+     *
+     * Original:
+     *
+     * 80px Schrift ungefähr
+     * 4px rot
+     * 2px blau
+     *
+     * Daher:
      */
 
-    const ctx =
-        canvas.getContext(
-            "2d",
-            {
-                alpha: true
+    const redOffset =
+        fontSize * (4 / 80);
+
+
+    const blueOffset =
+        fontSize * (2 / 80);
+
+
+    /*
+     * Sicherheitsrand.
+     */
+
+    const padding =
+        fontSize * 0.08;
+
+
+    /*
+     * Gesamtabmessungen.
+     */
+
+    const width =
+        metrics.width * scale
+        +
+        padding * 2
+        +
+        redOffset;
+
+
+    const height =
+        (
+            metrics.ascent
+            +
+            metrics.descent
+        ) * scale
+        +
+        padding * 2
+        +
+        redOffset
+        +
+        blueOffset;
+
+
+    /*
+     * Baseline.
+     */
+
+    const baseline =
+        padding
+        +
+        metrics.ascent * scale;
+
+
+    /*
+     * =====================================================
+     * SVG
+     * =====================================================
+     *
+     * KEIN Hintergrund-Element!
+     *
+     * Dadurch bleibt der komplette Bereich außerhalb
+     * der Schrift transparent.
+     */
+
+    const svg = `<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+
+    width="${Math.ceil(width)}"
+    height="${Math.ceil(height)}"
+
+    viewBox="0 0 ${width} ${height}"
+>
+
+    <defs>
+
+        <!--
+            Die Font wird als Font-Familie referenziert.
+            Der SVG-Text bleibt vollständig vektorbasiert.
+        -->
+
+        <style>
+
+            .villa-text {
+
+                font-family:
+                    "Archivo Black",
+                    sans-serif;
+
+                font-weight: 900;
+
+                font-size:
+                    ${fontSize}px;
+
+                letter-spacing: 0;
+
             }
-        );
+
+        </style>
+
+    </defs>
 
 
-    /*
-     * NICHT weiß füllen!
-     */
+    <!-- =================================================
+         BLAUER SCHATTEN
+         Original: -2px -2px
+         ================================================= -->
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+    <text
 
+        class="villa-text"
 
-    /*
-     * SVG auf die komplette Zielgröße
-     * hochskalieren.
-     */
+        x="${padding - blueOffset}"
 
-    ctx.drawImage(
+        y="${baseline - blueOffset}"
 
-        image,
+        fill="${BLUE}"
 
-        0,
-        0,
-
-        canvas.width,
-        canvas.height
-
-    );
+    >${TEXT}</text>
 
 
-    URL.revokeObjectURL(url);
+    <!-- =================================================
+         ROTER SCHATTEN
+         Original: 4px 4px
+         ================================================= -->
+
+    <text
+
+        class="villa-text"
+
+        x="${padding + redOffset}"
+
+        y="${baseline + redOffset}"
+
+        fill="${RED}"
+
+    >${TEXT}</text>
 
 
-    setStatus(
-        `✓ Fertig: ${canvas.width} × ${canvas.height}px`
-    );
+    <!-- =================================================
+         HAUPTSCHRIFT
+         ================================================= -->
+
+    <text
+
+        class="villa-text"
+
+        x="${padding}"
+
+        y="${baseline}"
+
+        fill="${MAIN_COLOR}"
+
+    >${TEXT}</text>
 
 
-    return canvas;
+</svg>`;
+
+
+    return svg;
 
 }
 
 
-/* ============================================================
+/* =========================================================
+   SVG IM BROWSER ANZEIGEN
+   ========================================================= */
+
+function showSVG(svgString) {
+
+
+    const preview =
+        document.getElementById("preview");
+
+
+    preview.innerHTML =
+        svgString;
+
+
+    /*
+     * SVG-Element direkt holen.
+     */
+
+    const svg =
+        preview.querySelector("svg");
+
+
+    if (!svg) {
+
+        throw new Error(
+            "SVG konnte nicht erzeugt werden."
+        );
+
+    }
+
+
+    setStatus(
+        "✓ SVG erzeugt – vollständig skalierbar"
+    );
+
+}
+
+
+/* =========================================================
+   DOWNLOAD
+   ========================================================= */
+
+function enableDownload(svgString) {
+
+
+    const button =
+        document.getElementById("download");
+
+
+    button.disabled =
+        false;
+
+
+    button.onclick =
+        function() {
+
+
+            const blob =
+                new Blob(
+                    [svgString],
+                    {
+                        type:
+                            "image/svg+xml;charset=utf-8"
+                    }
+                );
+
+
+            const url =
+                URL.createObjectURL(blob);
+
+
+            const link =
+                document.createElement("a");
+
+
+            link.href =
+                url;
+
+
+            link.download =
+                "villa-39-schriftzug.svg";
+
+
+            document.body.appendChild(
+                link
+            );
+
+
+            link.click();
+
+
+            link.remove();
+
+
+            setTimeout(
+                function() {
+
+                    URL.revokeObjectURL(
+                        url
+                    );
+
+                },
+                1000
+            );
+
+
+            setStatus(
+                "✓ villa-39-schriftzug.svg heruntergeladen"
+            );
+
+        };
+
+}
+
+
+/* =========================================================
    START
-   ============================================================ */
-
-let finalCanvas = null;
-
+   ========================================================= */
 
 async function init() {
+
 
     try {
 
 
-        /*
-         * Font laden.
-         */
-
-        await waitForFont();
+        await loadArchivo();
 
 
-        /*
-         * PNG erzeugen.
-         */
-
-        finalCanvas =
-            await renderPNG();
+        const svg =
+            createSVG();
 
 
-        /*
-         * ====================================================
-         * VORSCHAU
-         * ====================================================
-         */
-
-        const preview =
-            document.getElementById(
-                "preview"
-            );
+        showSVG(svg);
 
 
-        const previewImage =
-            document.createElement("img");
-
-
-        /*
-         * Vorschau aus der fertigen PNG.
-         */
-
-        previewImage.src =
-            finalCanvas.toDataURL(
-                "image/png"
-            );
-
-
-        preview.appendChild(
-            previewImage
-        );
-
-
-        /*
-         * ====================================================
-         * DOWNLOAD
-         * ====================================================
-         */
-
-        const button =
-            document.getElementById(
-                "download"
-            );
-
-
-        button.disabled =
-            false;
-
-
-        button.onclick =
-            function() {
-
-
-                setStatus(
-                    "PNG wird gespeichert …"
-                );
-
-
-                finalCanvas.toBlob(
-
-                    function(blob) {
-
-
-                        if (!blob) {
-
-                            setStatus(
-                                "Fehler beim PNG-Export."
-                            );
-
-                            return;
-
-                        }
-
-
-                        const url =
-                            URL.createObjectURL(
-                                blob
-                            );
-
-
-                        const link =
-                            document.createElement(
-                                "a"
-                            );
-
-
-                        link.href =
-                            url;
-
-
-                        link.download =
-                            "villa-39-schriftzug-10000px.png";
-
-
-                        document.body.appendChild(
-                            link
-                        );
-
-
-                        link.click();
-
-
-                        link.remove();
-
-
-                        setTimeout(
-
-                            function() {
-
-                                URL.revokeObjectURL(
-                                    url
-                                );
-
-                            },
-
-                            2000
-
-                        );
-
-
-                        setStatus(
-                            "✓ PNG mit transparentem Alpha-Kanal gespeichert"
-                        );
-
-
-                    },
-
-                    "image/png"
-
-                );
-
-            };
+        enableDownload(svg);
 
 
     }
@@ -934,18 +704,16 @@ async function init() {
             error.message
         );
 
+
     }
 
 }
 
-
-/*
- * Los geht's.
- */
 
 init();
 
 </script>
 
 </body>
+
 </html>
