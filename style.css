@@ -347,6 +347,7 @@ h2::after {
     gap: 50px;
     align-items: flex-start;
     margin-top: 50px;
+    margin-bottom: 30px;
 }
 
 .about-grid.reverse {
@@ -545,6 +546,62 @@ h2::after {
 .card:nth-child(1) .card-arrow { color: var(--riso-red); }
 .card:nth-child(2) .card-arrow { color: var(--riso-blue); }
 .card:nth-child(3) .card-arrow { color: var(--riso-green); }
+
+/* Explicit colour modifiers, for cards whose DOM position no longer
+   matches their intended colour via nth-child (e.g. the featured card) */
+.card.card-red { border-color: var(--riso-red); box-shadow: 6px 6px 0 var(--riso-red); }
+.card.card-blue { border-color: var(--riso-blue); box-shadow: 6px 6px 0 var(--riso-blue); }
+.card.card-green { border-color: var(--riso-green); box-shadow: 6px 6px 0 var(--riso-green); }
+
+.card.card-red h3 { color: var(--riso-red); }
+.card.card-blue h3 { color: var(--riso-blue); }
+.card.card-green h3 { color: var(--riso-green); }
+
+.card.card-red .card-arrow { color: var(--riso-red); }
+.card.card-blue .card-arrow { color: var(--riso-blue); }
+.card.card-green .card-arrow { color: var(--riso-green); }
+
+.card.card-red:hover { box-shadow: 10px 10px 0 var(--riso-red); }
+.card.card-blue:hover { box-shadow: 10px 10px 0 var(--riso-blue); }
+.card.card-green:hover { box-shadow: 10px 10px 0 var(--riso-green); }
+
+.card-featured {
+    display: block;
+    padding: 46px 50px;
+    margin-bottom: 30px;
+    box-shadow: 10px 10px 0 var(--riso-red);
+}
+
+.card-featured h3 {
+    font-size: 1.7rem;
+    margin-bottom: 18px;
+}
+
+.card-featured p {
+    max-width: 70ch;
+    font-size: 1.05rem;
+}
+
+.card-featured .card-arrow {
+    font-size: 1.05rem;
+    margin-top: 20px;
+}
+
+.card-featured:hover {
+    box-shadow: 14px 14px 0 var(--riso-red);
+}
+
+.cards-secondary .card {
+    padding: 24px;
+}
+
+.cards-secondary h3 {
+    font-size: 1rem;
+}
+
+.cards-secondary p {
+    font-size: .92rem;
+}
 
 .card:hover .card-arrow {
     opacity: .75;
