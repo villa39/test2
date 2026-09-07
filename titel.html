@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Villa 39 Export</title>
+<title>Villa 39 – Export</title>
 
-<!-- Google Font -->
+
+<!-- ============================================================
+     EXAKT DIE SCHRIFTART DER ORIGINAL-WEBSITE
+     ============================================================ -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600;700&family=Permanent+Marker&display=swap"
     rel="stylesheet"
 >
+
 
 <style>
 
@@ -27,56 +38,106 @@ body {
 }
 
 body {
+
     min-height: 100vh;
+
     background: #333;
+
     color: white;
+
     font-family: Arial, sans-serif;
+
     padding: 30px;
+
 }
 
 h1 {
+
     margin: 0 0 10px;
+
     font-size: 20px;
+
 }
 
 #status {
+
     font-family: monospace;
+
     margin-bottom: 25px;
+
 }
 
-/* Transparenz-Vorschau */
+
+/* ============================================================
+   TRANSPARENZ-VORSCHAU
+   ============================================================ */
 
 #preview {
+
     display: inline-block;
+
     padding: 30px;
+
+    max-width: calc(100vw - 60px);
+
+    overflow: auto;
 
     background-color: white;
 
     background-image:
-        linear-gradient(45deg, #ccc 25%, transparent 25%),
-        linear-gradient(-45deg, #ccc 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #ccc 75%),
-        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+
+        linear-gradient(
+            45deg,
+            #ccc 25%,
+            transparent 25%
+        ),
+
+        linear-gradient(
+            -45deg,
+            #ccc 25%,
+            transparent 25%
+        ),
+
+        linear-gradient(
+            45deg,
+            transparent 75%,
+            #ccc 75%
+        ),
+
+        linear-gradient(
+            -45deg,
+            transparent 75%,
+            #ccc 75%
+        );
 
     background-size: 30px 30px;
 
     background-position:
+
         0 0,
         0 15px,
         15px -15px,
         -15px 0;
 
-    max-width: calc(100vw - 60px);
-    overflow: auto;
 }
+
 
 #preview img {
+
     display: block;
-    width: min(1200px, calc(100vw - 120px));
+
+    width: min(
+        1200px,
+        calc(100vw - 120px)
+    );
+
     height: auto;
+
 }
 
+
 button {
+
     display: block;
 
     margin-top: 25px;
@@ -94,26 +155,45 @@ button {
     font-size: 16px;
 
     cursor: pointer;
+
 }
 
+
+button:hover {
+
+    background: #1D4C8C;
+
+}
+
+
 button:disabled {
+
     opacity: .4;
+
     cursor: default;
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-<h1>Villa 39 – 10.000px Export</h1>
+
+<h1>
+    Villa 39 – 10.000px Export
+</h1>
+
 
 <div id="status">
-    Lade Schrift …
+    Lade Archivo Black …
 </div>
 
+
 <div id="preview"></div>
+
 
 <button id="download" disabled>
     PNG herunterladen
@@ -124,7 +204,7 @@ button:disabled {
 
 
 /* ============================================================
-   EINSTELLUNGEN
+   KONFIGURATION
    ============================================================ */
 
 const TEXT = "Villa 39";
@@ -133,23 +213,48 @@ const OUTPUT_WIDTH = 10000;
 
 
 /*
- * Farben aus deiner Website
+ * EXAKTE FARBEN AUS DEINEM ORIGINAL-CSS
  */
 
 const MAIN_COLOR = "#F1ECDD";
+
 const RED = "#E7412D";
+
 const BLUE = "#1D4C8C";
 
 
 /*
- * Deine originalen Schatten:
+ * ============================================================
+ * SCHLAGSCHATTEN
+ * ============================================================
+ *
+ * Original deiner Website:
  *
  * text-shadow:
- *     4px 4px 0 red,
- *    -2px -2px 0 blue;
+ *     4px 4px 0 var(--riso-red),
+ *    -2px -2px 0 var(--riso-blue);
  *
- * Wir skalieren diese proportional.
+ * Für den Export etwas kompakter:
+ *
+ * Rot:  3px
+ * Blau: 1.5px
+ *
+ * Die Werte werden anschließend proportional
+ * zur tatsächlichen Schriftgröße hochskaliert.
  */
+
+const RED_OFFSET = 3;
+
+const BLUE_OFFSET = 1.5;
+
+
+/*
+ * Referenz-Schriftgröße.
+ *
+ * Alle Schatten werden relativ dazu berechnet.
+ */
+
+const REFERENCE_FONT_SIZE = 100;
 
 
 /* ============================================================
@@ -168,23 +273,25 @@ function setStatus(text) {
 
 
 /* ============================================================
-   FONT WARTEN
+   GOOGLE FONT LADEN
    ============================================================ */
 
 async function waitForFont() {
 
-    setStatus("Lade Archivo Black …");
+    setStatus(
+        "Lade Archivo Black von Google Fonts …"
+    );
 
 
     /*
-     * Warten bis Google Fonts fertig ist.
+     * Warten bis alle Webfonts fertig geladen sind.
      */
 
     await document.fonts.ready;
 
 
     /*
-     * Font explizit laden.
+     * Archivo Black explizit anfordern.
      */
 
     await document.fonts.load(
@@ -192,59 +299,18 @@ async function waitForFont() {
     );
 
 
-    /*
-     * Noch einmal warten.
-     */
-
     await document.fonts.ready;
 
 
     /*
-     * Testelement erzeugen.
+     * Prüfen, ob der Font tatsächlich verfügbar ist.
      */
 
-    const test =
-        document.createElement("span");
-
-
-    test.style.position = "absolute";
-
-    test.style.left = "-99999px";
-
-    test.style.top = "-99999px";
-
-    test.style.fontFamily =
-        '"Archivo Black", sans-serif';
-
-    test.style.fontSize = "100px";
-
-    test.style.fontWeight = "900";
-
-    test.style.whiteSpace = "nowrap";
-
-    test.textContent = TEXT;
-
-
-    document.body.appendChild(test);
-
-
-    /*
-     * Browser muss das Element jetzt tatsächlich
-     * mit der Schrift layouten.
-     */
-
-    const width =
-        test.getBoundingClientRect().width;
-
-
-    const height =
-        test.getBoundingClientRect().height;
-
-
-    document.body.removeChild(test);
-
-
-    if (width < 100 || height < 20) {
+    if (
+        !document.fonts.check(
+            '900 100px "Archivo Black"'
+        )
+    ) {
 
         throw new Error(
             "Archivo Black konnte nicht geladen werden."
@@ -253,12 +319,68 @@ async function waitForFont() {
     }
 
 
+    /*
+     * Zusätzliches echtes DOM-Mess-Element.
+     *
+     * Damit stellen wir sicher, dass der Browser
+     * die Schrift tatsächlich für Layout verwendet.
+     */
+
+    const test =
+        document.createElement("span");
+
+
+    test.style.position =
+        "absolute";
+
+    test.style.left =
+        "-99999px";
+
+    test.style.top =
+        "-99999px";
+
+    test.style.fontFamily =
+        '"Archivo Black", sans-serif';
+
+    test.style.fontWeight =
+        "900";
+
+    test.style.fontSize =
+        "100px";
+
+    test.style.whiteSpace =
+        "nowrap";
+
+    test.textContent =
+        TEXT;
+
+
+    document.body.appendChild(test);
+
+
+    const rect =
+        test.getBoundingClientRect();
+
+
+    const width =
+        rect.width;
+
+
+    document.body.removeChild(test);
+
+
+    if (width < 100) {
+
+        throw new Error(
+            "Die Schrift wurde nicht korrekt gerendert."
+        );
+
+    }
+
+
     setStatus(
         "✓ Archivo Black geladen"
     );
-
-
-    return true;
 
 }
 
@@ -271,46 +393,18 @@ function createSVG() {
 
 
     /*
-     * Wir benutzen eine SVG-Datei als Zwischenformat.
+     * Wir verwenden eine Referenzgröße.
      *
-     * Dadurch wird der Schriftzug zunächst als
-     * skalierbares SVG gerendert.
+     * Das SVG wird später verlustfrei auf 10.000px
+     * hochskaliert.
      */
 
-
-    const SVG_WIDTH = 1000;
+    const FONT_SIZE =
+        REFERENCE_FONT_SIZE;
 
 
     /*
-     * Wir nehmen eine feste SVG-Schriftgröße.
-     */
-
-    const FONT_SIZE = 100;
-
-
-    /*
-     * Schatten proportional zu deinem CSS.
-     *
-     * Bei 100px Schrift:
-     *
-     * rot  = 5px
-     * blau = 2.5px
-     *
-     * entspricht sehr nah deiner ursprünglichen
-     * 4px / 2px bei ~80px.
-     */
-
-    const RED_X = 5;
-
-    const RED_Y = 5;
-
-    const BLUE_X = -2.5;
-
-    const BLUE_Y = -2.5;
-
-
-    /*
-     * Temporäres DOM-Element zum Messen.
+     * Unsichtbares Mess-Element.
      */
 
     const measure =
@@ -327,13 +421,16 @@ function createSVG() {
         "-99999px";
 
     measure.style.fontFamily =
-        '"Archivo Black"';
+        '"Archivo Black", sans-serif';
 
     measure.style.fontWeight =
         "900";
 
     measure.style.fontSize =
         FONT_SIZE + "px";
+
+    measure.style.lineHeight =
+        "1";
 
     measure.style.whiteSpace =
         "nowrap";
@@ -361,21 +458,38 @@ function createSVG() {
 
 
     /*
-     * Breiter Sicherheitsrand.
+     * Falls aus irgendeinem Grund keine Schrift
+     * gemessen wurde.
      */
 
-    const padding =
-        30;
+    if (textWidth <= 0) {
 
+        throw new Error(
+            "Text konnte nicht gemessen werden."
+        );
+
+    }
+
+
+    /*
+     * Großzügiger Rand.
+     */
+
+    const padding = 25;
+
+
+    /*
+     * Gesamtabmessungen.
+     */
 
     const svgWidth =
         textWidth
         +
         padding * 2
         +
-        Math.abs(BLUE_X)
+        Math.abs(BLUE_OFFSET)
         +
-        RED_X;
+        RED_OFFSET;
 
 
     const svgHeight =
@@ -383,92 +497,126 @@ function createSVG() {
         +
         padding * 2
         +
-        RED_Y
+        RED_OFFSET
         +
-        Math.abs(BLUE_Y);
+        Math.abs(BLUE_OFFSET);
 
 
     /*
      * ========================================================
      * SVG
      * ========================================================
+     *
+     * KEIN Hintergrund-Element!
+     *
+     * Dadurch bleibt alles außerhalb des Textes
+     * vollständig transparent.
      */
 
     const svg = `
 
 <svg
     xmlns="http://www.w3.org/2000/svg"
+
     width="${svgWidth}"
+
     height="${svgHeight}"
+
     viewBox="0 0 ${svgWidth} ${svgHeight}"
+
 >
 
-    <!--
 
-        Transparenter Hintergrund.
-
-        Es gibt KEIN rect.
-
-    -->
-
-
-    <!-- Blauer Schatten -->
+    <!-- =====================================================
+         BLAUER SCHATTEN
+         ===================================================== -->
 
     <text
-        x="${padding + BLUE_X}"
-        y="${padding + textHeight}"
+
+        x="${padding - BLUE_OFFSET}"
+
+        y="${padding + textHeight - BLUE_OFFSET}"
+
         font-family="Archivo Black"
+
         font-weight="900"
+
         font-size="${FONT_SIZE}px"
+
         fill="${BLUE}"
+
     >${TEXT}</text>
 
 
-    <!-- Roter Schatten -->
+    <!-- =====================================================
+         ROTER SCHATTEN
+         ===================================================== -->
 
     <text
-        x="${padding + RED_X}"
-        y="${padding + textHeight + RED_Y}"
+
+        x="${padding + RED_OFFSET}"
+
+        y="${padding + textHeight + RED_OFFSET}"
+
         font-family="Archivo Black"
+
         font-weight="900"
+
         font-size="${FONT_SIZE}px"
+
         fill="${RED}"
+
     >${TEXT}</text>
 
 
-    <!-- Hauptschrift -->
+    <!-- =====================================================
+         HAUPTTEXT
+         ===================================================== -->
 
     <text
+
         x="${padding}"
+
         y="${padding + textHeight}"
+
         font-family="Archivo Black"
+
         font-weight="900"
+
         font-size="${FONT_SIZE}px"
+
         fill="${MAIN_COLOR}"
+
     >${TEXT}</text>
+
 
 </svg>
+
 `;
 
 
     return {
+
         svg,
+
         width: svgWidth,
+
         height: svgHeight
+
     };
 
 }
 
 
 /* ============================================================
-   SVG → PNG
+   SVG → 10.000px PNG
    ============================================================ */
 
 async function renderPNG() {
 
 
     setStatus(
-        "Erzeuge Vektor-Zwischenschritt …"
+        "Erzeuge hochauflösenden Schriftzug …"
     );
 
 
@@ -477,15 +625,19 @@ async function renderPNG() {
 
 
     /*
-     * SVG Blob
+     * SVG als Blob.
      */
 
     const blob =
         new Blob(
+
             [result.svg],
+
             {
-                type: "image/svg+xml;charset=utf-8"
+                type:
+                    "image/svg+xml;charset=utf-8"
             }
+
         );
 
 
@@ -494,7 +646,7 @@ async function renderPNG() {
 
 
     /*
-     * SVG als Bild laden.
+     * SVG laden.
      */
 
     const image =
@@ -524,12 +676,13 @@ async function renderPNG() {
 
     /*
      * ========================================================
-     * 10.000px CANVAS
+     * ZIELGRÖSSE
      * ========================================================
      */
 
     const scale =
-        OUTPUT_WIDTH / result.width;
+        OUTPUT_WIDTH /
+        result.width;
 
 
     const outputHeight =
@@ -537,6 +690,10 @@ async function renderPNG() {
             result.height * scale
         );
 
+
+    /*
+     * 10.000px Canvas.
+     */
 
     const canvas =
         document.createElement("canvas");
@@ -551,16 +708,21 @@ async function renderPNG() {
 
 
     /*
-     * Wichtig:
-     *
-     * Alpha ist standardmäßig aktiv.
-     *
-     * Wir malen KEINEN Hintergrund.
+     * Transparenter Canvas.
      */
 
     const ctx =
-        canvas.getContext("2d");
+        canvas.getContext(
+            "2d",
+            {
+                alpha: true
+            }
+        );
 
+
+    /*
+     * NICHT weiß füllen!
+     */
 
     ctx.clearRect(
         0,
@@ -571,27 +733,28 @@ async function renderPNG() {
 
 
     /*
-     * SVG auf 10.000px skalieren.
+     * SVG auf die komplette Zielgröße
+     * hochskalieren.
      */
 
     ctx.drawImage(
+
         image,
+
         0,
         0,
+
         canvas.width,
         canvas.height
+
     );
 
-
-    /*
-     * Aufräumen.
-     */
 
     URL.revokeObjectURL(url);
 
 
     setStatus(
-        `✓ ${canvas.width} × ${canvas.height}px – transparenter Hintergrund`
+        `✓ Fertig: ${canvas.width} × ${canvas.height}px`
     );
 
 
@@ -611,32 +774,46 @@ async function init() {
 
     try {
 
+
+        /*
+         * Font laden.
+         */
+
         await waitForFont();
 
+
+        /*
+         * PNG erzeugen.
+         */
 
         finalCanvas =
             await renderPNG();
 
 
         /*
-         * Vorschau
+         * ====================================================
+         * VORSCHAU
+         * ====================================================
          */
 
         const preview =
-            document.getElementById("preview");
+            document.getElementById(
+                "preview"
+            );
 
-
-        /*
-         * Wir zeigen die 10.000px-Datei
-         * verkleinert im Browser an.
-         */
 
         const previewImage =
             document.createElement("img");
 
 
+        /*
+         * Vorschau aus der fertigen PNG.
+         */
+
         previewImage.src =
-            finalCanvas.toDataURL("image/png");
+            finalCanvas.toDataURL(
+                "image/png"
+            );
 
 
         preview.appendChild(
@@ -645,11 +822,15 @@ async function init() {
 
 
         /*
-         * Download aktivieren.
+         * ====================================================
+         * DOWNLOAD
+         * ====================================================
          */
 
         const button =
-            document.getElementById("download");
+            document.getElementById(
+                "download"
+            );
 
 
         button.disabled =
@@ -657,7 +838,7 @@ async function init() {
 
 
         button.onclick =
-            async function() {
+            function() {
 
 
                 setStatus(
@@ -666,15 +847,31 @@ async function init() {
 
 
                 finalCanvas.toBlob(
+
                     function(blob) {
 
 
+                        if (!blob) {
+
+                            setStatus(
+                                "Fehler beim PNG-Export."
+                            );
+
+                            return;
+
+                        }
+
+
                         const url =
-                            URL.createObjectURL(blob);
+                            URL.createObjectURL(
+                                blob
+                            );
 
 
                         const link =
-                            document.createElement("a");
+                            document.createElement(
+                                "a"
+                            );
 
 
                         link.href =
@@ -697,24 +894,29 @@ async function init() {
 
 
                         setTimeout(
-                            () => {
+
+                            function() {
 
                                 URL.revokeObjectURL(
                                     url
                                 );
 
                             },
+
                             2000
+
                         );
 
 
                         setStatus(
-                            "✓ Fertig – 10.000px PNG mit Alpha-Kanal"
+                            "✓ PNG mit transparentem Alpha-Kanal gespeichert"
                         );
 
 
                     },
+
                     "image/png"
+
                 );
 
             };
@@ -722,6 +924,7 @@ async function init() {
 
     }
     catch (error) {
+
 
         console.error(error);
 
@@ -735,6 +938,10 @@ async function init() {
 
 }
 
+
+/*
+ * Los geht's.
+ */
 
 init();
 
