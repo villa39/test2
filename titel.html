@@ -1,224 +1,122 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
+<meta charset="UTF-8">
 
-    <meta charset="UTF-8">
+<title>Villa 39 Export</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <title>Villa 39 – Export</title>
+<link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap"
+    rel="stylesheet"
+>
 
+<style>
 
-    <!-- =====================================================
-         ARCHIVO BLACK
-         ===================================================== -->
+* {
+    box-sizing: border-box;
+}
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+body {
+    min-height: 100vh;
+    background: #333;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 30px;
+}
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap"
-        rel="stylesheet">
+h1 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
 
+#status {
+    font-family: monospace;
+    margin-bottom: 25px;
+}
 
-    <style>
+/* Transparenz-Vorschau */
 
-        :root {
+#preview {
+    display: inline-block;
+    padding: 30px;
 
-            --paper: #F1ECDD;
-            --red: #E7412D;
-            --blue: #1D4C8C;
-            --ink: #1C1B18;
+    background-color: white;
 
-        }
+    background-image:
+        linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
 
+    background-size: 30px 30px;
 
-        * {
-            box-sizing: border-box;
-        }
+    background-position:
+        0 0,
+        0 15px,
+        15px -15px,
+        -15px 0;
 
+    max-width: calc(100vw - 60px);
+    overflow: auto;
+}
 
-        html,
-        body {
+#preview img {
+    display: block;
+    width: min(1200px, calc(100vw - 120px));
+    height: auto;
+}
 
-            margin: 0;
-            padding: 0;
+button {
+    display: block;
 
-        }
+    margin-top: 25px;
 
+    padding: 14px 24px;
 
-        body {
+    border: none;
 
-            min-height: 100vh;
+    background: #E7412D;
 
-            padding: 40px;
+    color: white;
 
-            background: #444;
+    font-weight: bold;
 
-            color: white;
+    font-size: 16px;
 
-            font-family: Arial, sans-serif;
+    cursor: pointer;
+}
 
-        }
+button:disabled {
+    opacity: .4;
+    cursor: default;
+}
 
-
-        h1 {
-
-            margin: 0 0 10px;
-
-            font-size: 22px;
-
-        }
-
-
-        #status {
-
-            margin-bottom: 25px;
-
-            font-family: monospace;
-
-            line-height: 1.5;
-
-        }
-
-
-        /*
-         * ================================================
-         * TRANSPARENZ-VORSCHAU
-         * ================================================
-         */
-
-        #preview {
-
-            display: inline-block;
-
-            max-width: 100%;
-
-            overflow: auto;
-
-            padding: 40px;
-
-            background-color: white;
-
-            background-image:
-
-                linear-gradient(
-                    45deg,
-                    #cccccc 25%,
-                    transparent 25%
-                ),
-
-                linear-gradient(
-                    -45deg,
-                    #cccccc 25%,
-                    transparent 25%
-                ),
-
-                linear-gradient(
-                    45deg,
-                    transparent 75%,
-                    #cccccc 75%
-                ),
-
-                linear-gradient(
-                    -45deg,
-                    transparent 75%,
-                    #cccccc 75%
-                );
-
-            background-size: 40px 40px;
-
-            background-position:
-
-                0 0,
-                0 20px,
-                20px -20px,
-                -20px 0;
-
-        }
-
-
-        #preview canvas {
-
-            display: block;
-
-            width: min(1200px, 80vw);
-
-            height: auto;
-
-        }
-
-
-        button {
-
-            display: block;
-
-            margin-top: 25px;
-
-            padding: 16px 28px;
-
-            border: 0;
-
-            background: var(--ink);
-
-            color: white;
-
-            font-size: 16px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-        }
-
-
-        button:hover {
-
-            background: var(--red);
-
-        }
-
-
-        button:disabled {
-
-            opacity: .4;
-
-            cursor: default;
-
-        }
-
-    </style>
-
+</style>
 </head>
 
 
 <body>
 
-
-<h1>
-    Villa 39 – High Resolution Export
-</h1>
-
+<h1>Villa 39 – 10.000px Export</h1>
 
 <div id="status">
-    Initialisiere …
+    Lade Schrift …
 </div>
-
 
 <div id="preview"></div>
 
-
-<button id="download"
-        disabled>
-
+<button id="download" disabled>
     PNG herunterladen
-
 </button>
 
 
@@ -226,91 +124,67 @@
 
 
 /* ============================================================
-   KONFIGURATION
+   EINSTELLUNGEN
    ============================================================ */
 
-
-/*
- * EXAKTER TEXT
- */
-
 const TEXT = "Villa 39";
-
-
-/*
- * Deine Farben aus style.css
- */
-
-const PAPER = "#F1ECDD";
-
-const RED = "#E7412D";
-
-const BLUE = "#1D4C8C";
-
-
-/*
- * ZIELBREITE
- *
- * Die fertige PNG wird exakt 10.000 px breit.
- */
 
 const OUTPUT_WIDTH = 10000;
 
 
 /*
- * Original aus deiner Website:
+ * Farben aus deiner Website
+ */
+
+const MAIN_COLOR = "#F1ECDD";
+const RED = "#E7412D";
+const BLUE = "#1D4C8C";
+
+
+/*
+ * Deine originalen Schatten:
  *
  * text-shadow:
  *     4px 4px 0 red,
  *    -2px -2px 0 blue;
  *
- * Wir skalieren diese Werte mit der Schriftgröße.
- *
- * Referenz:
- * 80px Schriftgröße
+ * Wir skalieren diese proportional.
  */
-
-const RED_SHADOW = 4 / 80;
-
-const BLUE_SHADOW = 2 / 80;
-
-
-/*
- * Rand proportional zur Ausgabegröße.
- */
-
-const PADDING = 0.04;
 
 
 /* ============================================================
    STATUS
    ============================================================ */
 
+const status =
+    document.getElementById("status");
+
+
 function setStatus(text) {
 
-    document.getElementById("status").textContent =
-        text;
+    status.textContent = text;
 
 }
 
 
 /* ============================================================
-   FONT LADEN
+   FONT WARTEN
    ============================================================ */
 
-async function loadFont() {
+async function waitForFont() {
 
-
-    setStatus(
-        "Lade Archivo Black von Google Fonts …"
-    );
+    setStatus("Lade Archivo Black …");
 
 
     /*
-     * Wichtig:
-     *
-     * Wir verwenden GENAU den Namen,
-     * den Google Fonts registriert.
+     * Warten bis Google Fonts fertig ist.
+     */
+
+    await document.fonts.ready;
+
+
+    /*
+     * Font explizit laden.
      */
 
     await document.fonts.load(
@@ -319,219 +193,350 @@ async function loadFont() {
 
 
     /*
-     * Warten bis Font-Loading abgeschlossen ist.
+     * Noch einmal warten.
      */
 
     await document.fonts.ready;
 
 
     /*
-     * Prüfen.
+     * Testelement erzeugen.
      */
 
-    const fontLoaded =
-        document.fonts.check(
-            '900 100px "Archivo Black"'
-        );
+    const test =
+        document.createElement("span");
 
 
-    if (!fontLoaded) {
+    test.style.position = "absolute";
 
-        throw new Error(
-            "Archivo Black wurde nicht geladen."
-        );
+    test.style.left = "-99999px";
 
-    }
+    test.style.top = "-99999px";
+
+    test.style.fontFamily =
+        '"Archivo Black", sans-serif';
+
+    test.style.fontSize = "100px";
+
+    test.style.fontWeight = "900";
+
+    test.style.whiteSpace = "nowrap";
+
+    test.textContent = TEXT;
+
+
+    document.body.appendChild(test);
 
 
     /*
-     * Browser explizit zwingen,
-     * die Schrift einmal zu verwenden.
+     * Browser muss das Element jetzt tatsächlich
+     * mit der Schrift layouten.
      */
 
-    const canvas =
-        document.createElement("canvas");
-
-
-    const ctx =
-        canvas.getContext("2d");
-
-
-    ctx.font =
-        '900 100px "Archivo Black"';
-
-
     const width =
-        ctx.measureText(TEXT).width;
+        test.getBoundingClientRect().width;
 
 
-    if (!width || width < 100) {
+    const height =
+        test.getBoundingClientRect().height;
+
+
+    document.body.removeChild(test);
+
+
+    if (width < 100 || height < 20) {
 
         throw new Error(
-            "Der Browser verwendet offenbar nicht Archivo Black."
+            "Archivo Black konnte nicht geladen werden."
         );
 
     }
 
 
     setStatus(
-        "✓ Archivo Black erfolgreich geladen"
+        "✓ Archivo Black geladen"
     );
+
+
+    return true;
 
 }
 
 
 /* ============================================================
-   CANVAS ERSTELLEN
+   SVG ERZEUGEN
    ============================================================ */
 
-function createCanvas() {
+function createSVG() {
 
 
     /*
-     * Temporäres Mess-Canvas
+     * Wir benutzen eine SVG-Datei als Zwischenformat.
+     *
+     * Dadurch wird der Schriftzug zunächst als
+     * skalierbares SVG gerendert.
      */
 
-    const measureCanvas =
-        document.createElement("canvas");
 
+    const SVG_WIDTH = 1000;
+
+
+    /*
+     * Wir nehmen eine feste SVG-Schriftgröße.
+     */
+
+    const FONT_SIZE = 100;
+
+
+    /*
+     * Schatten proportional zu deinem CSS.
+     *
+     * Bei 100px Schrift:
+     *
+     * rot  = 5px
+     * blau = 2.5px
+     *
+     * entspricht sehr nah deiner ursprünglichen
+     * 4px / 2px bei ~80px.
+     */
+
+    const RED_X = 5;
+
+    const RED_Y = 5;
+
+    const BLUE_X = -2.5;
+
+    const BLUE_Y = -2.5;
+
+
+    /*
+     * Temporäres DOM-Element zum Messen.
+     */
 
     const measure =
-        measureCanvas.getContext("2d");
+        document.createElement("span");
 
 
-    /*
-     * Große Referenzschrift
-     */
+    measure.style.position =
+        "absolute";
 
-    const referenceSize = 1000;
+    measure.style.left =
+        "-99999px";
 
+    measure.style.top =
+        "-99999px";
 
-    measure.font =
-        `900 ${referenceSize}px "Archivo Black"`;
+    measure.style.fontFamily =
+        '"Archivo Black"';
 
+    measure.style.fontWeight =
+        "900";
 
-    const reference =
-        measure.measureText(TEXT);
+    measure.style.fontSize =
+        FONT_SIZE + "px";
 
+    measure.style.whiteSpace =
+        "nowrap";
 
-    const referenceWidth =
-        reference.width;
-
-
-    /*
-     * ========================================================
-     * PADDING
-     * ========================================================
-     */
-
-    const padding =
-        OUTPUT_WIDTH * PADDING;
+    measure.textContent =
+        TEXT;
 
 
-    /*
-     * Schatten bei 1000px Fontgröße
-     */
-
-    const referenceRed =
-        referenceSize * RED_SHADOW;
+    document.body.appendChild(measure);
 
 
-    const referenceBlue =
-        referenceSize * BLUE_SHADOW;
-
-
-    /*
-     * ========================================================
-     * SCHRIFTGRÖSSE BERECHNEN
-     * ========================================================
-     *
-     * Wir suchen die Fontgröße, bei der
-     * alles zusammen 10.000px breit ist.
-     */
-
-    const usableWidth =
-        OUTPUT_WIDTH
-        - padding * 2
-        - referenceRed
-        - referenceBlue;
-
-
-    const scale =
-        usableWidth /
-        referenceWidth;
-
-
-    const fontSize =
-        referenceSize *
-        scale;
-
-
-    /*
-     * Schatten entsprechend skalieren.
-     */
-
-    const redOffset =
-        fontSize * RED_SHADOW;
-
-
-    const blueOffset =
-        fontSize * BLUE_SHADOW;
-
-
-    /*
-     * ========================================================
-     * FINALE MESSUNG
-     * ========================================================
-     */
-
-    measure.font =
-        `900 ${fontSize}px "Archivo Black"`;
-
-
-    const metrics =
-        measure.measureText(TEXT);
+    const rect =
+        measure.getBoundingClientRect();
 
 
     const textWidth =
-        metrics.width;
+        rect.width;
 
 
-    const ascent =
-        metrics.actualBoundingBoxAscent ||
-        fontSize * 0.75;
+    const textHeight =
+        rect.height;
 
 
-    const descent =
-        metrics.actualBoundingBoxDescent ||
-        fontSize * 0.15;
+    document.body.removeChild(measure);
 
 
     /*
-     * Höhe des finalen Bildes
+     * Breiter Sicherheitsrand.
      */
 
-    const height =
-        Math.ceil(
+    const padding =
+        30;
 
-            padding * 2
-            +
-            ascent
-            +
-            descent
-            +
-            redOffset
-            +
-            blueOffset
 
+    const svgWidth =
+        textWidth
+        +
+        padding * 2
+        +
+        Math.abs(BLUE_X)
+        +
+        RED_X;
+
+
+    const svgHeight =
+        textHeight
+        +
+        padding * 2
+        +
+        RED_Y
+        +
+        Math.abs(BLUE_Y);
+
+
+    /*
+     * ========================================================
+     * SVG
+     * ========================================================
+     */
+
+    const svg = `
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="${svgWidth}"
+    height="${svgHeight}"
+    viewBox="0 0 ${svgWidth} ${svgHeight}"
+>
+
+    <!--
+
+        Transparenter Hintergrund.
+
+        Es gibt KEIN rect.
+
+    -->
+
+
+    <!-- Blauer Schatten -->
+
+    <text
+        x="${padding + BLUE_X}"
+        y="${padding + textHeight}"
+        font-family="Archivo Black"
+        font-weight="900"
+        font-size="${FONT_SIZE}px"
+        fill="${BLUE}"
+    >${TEXT}</text>
+
+
+    <!-- Roter Schatten -->
+
+    <text
+        x="${padding + RED_X}"
+        y="${padding + textHeight + RED_Y}"
+        font-family="Archivo Black"
+        font-weight="900"
+        font-size="${FONT_SIZE}px"
+        fill="${RED}"
+    >${TEXT}</text>
+
+
+    <!-- Hauptschrift -->
+
+    <text
+        x="${padding}"
+        y="${padding + textHeight}"
+        font-family="Archivo Black"
+        font-weight="900"
+        font-size="${FONT_SIZE}px"
+        fill="${MAIN_COLOR}"
+    >${TEXT}</text>
+
+</svg>
+`;
+
+
+    return {
+        svg,
+        width: svgWidth,
+        height: svgHeight
+    };
+
+}
+
+
+/* ============================================================
+   SVG → PNG
+   ============================================================ */
+
+async function renderPNG() {
+
+
+    setStatus(
+        "Erzeuge Vektor-Zwischenschritt …"
+    );
+
+
+    const result =
+        createSVG();
+
+
+    /*
+     * SVG Blob
+     */
+
+    const blob =
+        new Blob(
+            [result.svg],
+            {
+                type: "image/svg+xml;charset=utf-8"
+            }
         );
 
 
+    const url =
+        URL.createObjectURL(blob);
+
+
+    /*
+     * SVG als Bild laden.
+     */
+
+    const image =
+        new Image();
+
+
+    image.decoding =
+        "async";
+
+
+    image.src =
+        url;
+
+
+    await new Promise(
+        (resolve, reject) => {
+
+            image.onload =
+                resolve;
+
+            image.onerror =
+                reject;
+
+        }
+    );
+
+
     /*
      * ========================================================
-     * HIGH RESOLUTION CANVAS
+     * 10.000px CANVAS
      * ========================================================
      */
+
+    const scale =
+        OUTPUT_WIDTH / result.width;
+
+
+    const outputHeight =
+        Math.ceil(
+            result.height * scale
+        );
+
 
     const canvas =
         document.createElement("canvas");
@@ -542,24 +547,19 @@ function createCanvas() {
 
 
     canvas.height =
-        height;
+        outputHeight;
 
 
     /*
-     * WICHTIG:
+     * Wichtig:
      *
-     * Wir füllen den Hintergrund NICHT.
+     * Alpha ist standardmäßig aktiv.
      *
-     * Das Canvas startet transparent.
+     * Wir malen KEINEN Hintergrund.
      */
 
     const ctx =
-        canvas.getContext(
-            "2d",
-            {
-                alpha: true
-            }
-        );
+        canvas.getContext("2d");
 
 
     ctx.clearRect(
@@ -571,93 +571,27 @@ function createCanvas() {
 
 
     /*
-     * ========================================================
-     * TEXT-EINSTELLUNGEN
-     * ========================================================
+     * SVG auf 10.000px skalieren.
      */
 
-    ctx.font =
-        `900 ${fontSize}px "Archivo Black"`;
-
-
-    ctx.textBaseline =
-        "alphabetic";
-
-
-    ctx.textAlign =
-        "left";
+    ctx.drawImage(
+        image,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
 
     /*
-     * Position
+     * Aufräumen.
      */
 
-    const x =
-        padding + blueOffset;
+    URL.revokeObjectURL(url);
 
 
-    const baseline =
-        padding
-        +
-        ascent
-        +
-        blueOffset;
-
-
-    /* ========================================================
-       BLAUER SCHATTEN
-       ======================================================== */
-
-    ctx.fillStyle =
-        BLUE;
-
-
-    ctx.fillText(
-
-        TEXT,
-
-        x + blueOffset,
-
-        baseline - blueOffset
-
-    );
-
-
-    /* ========================================================
-       ROTER SCHATTEN
-       ======================================================== */
-
-    ctx.fillStyle =
-        RED;
-
-
-    ctx.fillText(
-
-        TEXT,
-
-        x + redOffset,
-
-        baseline + redOffset
-
-    );
-
-
-    /* ========================================================
-       HAUPTTEXT
-       ======================================================== */
-
-    ctx.fillStyle =
-        PAPER;
-
-
-    ctx.fillText(
-
-        TEXT,
-
-        x,
-
-        baseline
-
+    setStatus(
+        `✓ ${canvas.width} × ${canvas.height}px – transparenter Hintergrund`
     );
 
 
@@ -667,139 +601,127 @@ function createCanvas() {
 
 
 /* ============================================================
-   PNG DOWNLOAD
-   ============================================================ */
-
-function setupDownload(canvas) {
-
-
-    const button =
-        document.getElementById("download");
-
-
-    button.disabled = false;
-
-
-    button.addEventListener(
-        "click",
-        function() {
-
-
-            setStatus(
-                "Erzeuge 10.000px PNG …"
-            );
-
-
-            canvas.toBlob(
-
-                function(blob) {
-
-
-                    if (!blob) {
-
-                        setStatus(
-                            "Fehler beim Erzeugen der PNG."
-                        );
-
-                        return;
-
-                    }
-
-
-                    const url =
-                        URL.createObjectURL(blob);
-
-
-                    const link =
-                        document.createElement("a");
-
-
-                    link.href =
-                        url;
-
-
-                    link.download =
-                        "villa-39-schriftzug-10000px.png";
-
-
-                    document.body.appendChild(link);
-
-
-                    link.click();
-
-
-                    document.body.removeChild(link);
-
-
-                    setTimeout(
-                        function() {
-
-                            URL.revokeObjectURL(url);
-
-                        },
-                        2000
-                    );
-
-
-                    setStatus(
-                        "✓ Fertig – 10.000px PNG mit transparentem Alpha-Kanal"
-                    );
-
-
-                },
-
-                "image/png"
-
-            );
-
-        }
-    );
-
-}
-
-
-/* ============================================================
    START
    ============================================================ */
 
-async function init() {
+let finalCanvas = null;
 
+
+async function init() {
 
     try {
 
-
-        await loadFont();
-
-
-        setStatus(
-            "Erzeuge 10.000px Schriftzug …"
-        );
+        await waitForFont();
 
 
-        const canvas =
-            createCanvas();
+        finalCanvas =
+            await renderPNG();
 
 
         /*
-         * Vorschau anzeigen
+         * Vorschau
          */
 
-        document
-            .getElementById("preview")
-            .appendChild(canvas);
+        const preview =
+            document.getElementById("preview");
 
 
-        setStatus(
-            `✓ Fertig – ${canvas.width} × ${canvas.height}px`
+        /*
+         * Wir zeigen die 10.000px-Datei
+         * verkleinert im Browser an.
+         */
+
+        const previewImage =
+            document.createElement("img");
+
+
+        previewImage.src =
+            finalCanvas.toDataURL("image/png");
+
+
+        preview.appendChild(
+            previewImage
         );
 
 
-        setupDownload(canvas);
+        /*
+         * Download aktivieren.
+         */
+
+        const button =
+            document.getElementById("download");
+
+
+        button.disabled =
+            false;
+
+
+        button.onclick =
+            async function() {
+
+
+                setStatus(
+                    "PNG wird gespeichert …"
+                );
+
+
+                finalCanvas.toBlob(
+                    function(blob) {
+
+
+                        const url =
+                            URL.createObjectURL(blob);
+
+
+                        const link =
+                            document.createElement("a");
+
+
+                        link.href =
+                            url;
+
+
+                        link.download =
+                            "villa-39-schriftzug-10000px.png";
+
+
+                        document.body.appendChild(
+                            link
+                        );
+
+
+                        link.click();
+
+
+                        link.remove();
+
+
+                        setTimeout(
+                            () => {
+
+                                URL.revokeObjectURL(
+                                    url
+                                );
+
+                            },
+                            2000
+                        );
+
+
+                        setStatus(
+                            "✓ Fertig – 10.000px PNG mit Alpha-Kanal"
+                        );
+
+
+                    },
+                    "image/png"
+                );
+
+            };
 
 
     }
     catch (error) {
-
 
         console.error(error);
 
@@ -809,21 +731,14 @@ async function init() {
             error.message
         );
 
-
     }
 
 }
 
 
-/* ============================================================
-   LOS
-   ============================================================ */
-
 init();
 
 </script>
 
-
 </body>
-
 </html>
