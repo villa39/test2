@@ -524,6 +524,15 @@ h2::after {
 .card:nth-child(2):hover { box-shadow: 10px 10px 0 var(--riso-blue); }
 .card:nth-child(3):hover { box-shadow: 10px 10px 0 var(--riso-green); }
 
+.card--static:hover {
+    transform: none;
+    cursor: default;
+}
+
+.card--static:nth-child(1):hover { box-shadow: 6px 6px 0 var(--riso-red); }
+.card--static:nth-child(2):hover { box-shadow: 6px 6px 0 var(--riso-blue); }
+.card--static:nth-child(3):hover { box-shadow: 6px 6px 0 var(--riso-green); }
+
 .card-arrow {
     display: block;
     margin-top: 16px;
