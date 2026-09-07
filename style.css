@@ -346,6 +346,15 @@ h2::after {
     display: flex;
     gap: 50px;
     align-items: flex-start;
+    margin-top: 50px;
+}
+
+.about-grid.reverse {
+    flex-direction: row-reverse;
+}
+
+.section-heading-spaced {
+    margin-top: 60px;
 }
 
 .about-grid img {
@@ -675,6 +684,10 @@ h2::after {
     padding: 90px 0;
 }
 
+.subpage-content--wide {
+    width: min(980px, 88%);
+}
+
 .subpage-content section {
     margin-bottom: 60px;
 }
@@ -692,6 +705,15 @@ h2::after {
 .subpage-list {
     list-style: none;
     max-width: 65ch;
+}
+
+ol.subpage-list {
+    list-style: decimal;
+    margin-left: 1.3em;
+}
+
+ol.subpage-list li {
+    padding-left: 8px;
 }
 
 .subpage-list li {
