@@ -37,7 +37,7 @@
         <ul id="navLinks">
             <li><a href="#about">Worum es geht</a></li>
             <li><a href="#aktuelles">Aktuelles</a></li>
-            <li><a href="direktkredit.html">Direktkredit</a></li>
+            <li><a href="#support">Direktkredit</a></li>
             <li><a href="#geschichte">Die Villa</a></li>
             <li><a href="#newsletter">Newsletter</a></li>
             <li><a href="#contact">Kontakt</a></li>
@@ -221,7 +221,7 @@
             <h2>Kontakt</h2>
 
             <p>Email: villa39@gmx.de</p>
-            <p>Addresse: Rottendorfer Str. 39, 97074 Würzburg-Frauenland</p>
+            <p>Adresse: Rottendorfer Str. 39, 97074 Würzburg-Frauenland</p>
             <p>Instagram: <a href="https://www.instagram.com/dievilla39" target="_blank" rel="noopener">@dievilla39</a></p>
 
         </section>
@@ -284,18 +284,28 @@
                             day: '2-digit', month: 'long', year: 'numeric'
                         });
 
-                        const eventDateHtml = item.eventDate
-                            ? `<p class="aktuelles-event-date">Termin: ${new Date(item.eventDate).toLocaleDateString('de-DE', {
-                                    day: '2-digit', month: 'long', year: 'numeric'
-                                })}</p>`
-                            : '';
+                        const dateEl = document.createElement('p');
+                        dateEl.className = 'aktuelles-date';
+                        dateEl.textContent = formattedDate;
 
-                        entry.innerHTML = `
-                            <p class="aktuelles-date">${formattedDate}</p>
-                            <h3>${item.title}</h3>
-                            ${eventDateHtml}
-                            <p>${item.text}</p>
-                        `;
+                        const titleEl = document.createElement('h3');
+                        titleEl.textContent = item.title;
+
+                        entry.append(dateEl, titleEl);
+
+                        if (item.eventDate) {
+                            const eventEl = document.createElement('p');
+                            eventEl.className = 'aktuelles-event-date';
+                            const formattedEventDate = new Date(item.eventDate).toLocaleDateString('de-DE', {
+                                day: '2-digit', month: 'long', year: 'numeric'
+                            });
+                            eventEl.textContent = `Termin: ${formattedEventDate}`;
+                            entry.append(eventEl);
+                        }
+
+                        const textEl = document.createElement('p');
+                        textEl.textContent = item.text;
+                        entry.append(textEl);
 
                         aktuellesList.appendChild(entry);
                     });
