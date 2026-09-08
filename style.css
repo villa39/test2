@@ -346,8 +346,12 @@ h2::after {
     display: flex;
     gap: 50px;
     align-items: flex-start;
-    margin-top: 50px;
+    margin-top: 0;
     margin-bottom: 30px;
+}
+
+.subpage-content .about-grid {
+    margin-top: 80px;
 }
 
 .about-grid.reverse {
@@ -770,7 +774,7 @@ h2::after {
 }
 
 .subpage-content > h2 {
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 .subpage-content.subpage-content > *:has(+ h2) {
