@@ -354,10 +354,6 @@ h2::after {
     flex-direction: row-reverse;
 }
 
-.section-heading-spaced {
-    margin-top: 60px;
-}
-
 .about-grid img {
     width: 45%;
     height: auto;
@@ -383,6 +379,11 @@ h2::after {
 
 .about-cta {
     margin-top: 12px;
+}
+
+.subpage-content .about-cta-spaced {
+    margin-top: 40px;
+    margin-bottom: 70px;
 }
 
 .inline-link {
@@ -469,7 +470,7 @@ h2::after {
     flex: 1;
 }
 
-.story-pullquote {
+.story-pullquote.story-pullquote {
     font-family: "Archivo Black", sans-serif;
     font-size: 1.4rem;
     line-height: 1.4;
@@ -768,6 +769,14 @@ h2::after {
     max-width: 65ch;
 }
 
+.subpage-content > h2 {
+    margin-top: 50px;
+}
+
+.subpage-content.subpage-content > *:has(+ h2) {
+    margin-bottom: 0;
+}
+
 .subpage-list {
     list-style: none;
     max-width: 65ch;
@@ -1042,6 +1051,18 @@ footer a:not(.footer-social):hover {
     .cards,
     .story-row {
         flex-direction: column;
+    }
+
+    .about-grid.reverse {
+        flex-direction: column;
+    }
+
+    .about-grid > div {
+        order: 1;
+    }
+
+    .about-grid > img {
+        order: 2;
     }
 
     .story-row.reverse {
