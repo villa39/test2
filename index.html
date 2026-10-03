@@ -293,6 +293,15 @@
 
                         entry.append(dateEl, titleEl);
 
+                        if (item.image) {
+                            const imageEl = document.createElement('img');
+                            imageEl.className = 'aktuelles-image';
+                            imageEl.src = item.image;
+                            imageEl.alt = item.imageAlt || '';
+                            imageEl.loading = 'lazy';
+                            entry.append(imageEl);
+                        }
+
                         if (item.eventDate) {
                             const eventEl = document.createElement('p');
                             eventEl.className = 'aktuelles-event-date';
