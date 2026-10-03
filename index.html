@@ -85,7 +85,7 @@
                         <strong>Wer wir sind</strong>. In der Villa lebt seit fast 50 Jahren eine bunte Gemeinschaft aus Menschen unterschiedlichster Hintergründe.<a href="#geschichte" class="inline-link"><strong>→ Geschichte</strong></a>
                     </p>
                     <p>
-                        <strong>Unser Zuhause ist in Gefahr</strong>. Der Villa droht der Verkauf an einen Investor und damit der Abriss. Damit würde in Würzburg noch mehr bezahlbarer Wohn- und Lebensraum verloren gehen. Mit Hilfe des Mietshäuser-Syndikats wollen wir die Villa kaufen und so dauerhaft dem Wohnungsmarkt entziehen. <a href="#finanzierung" class="inline-link"><strong>→ Finanzierung</strong></a>
+                        <strong>Unser Zuhause ist in Gefahr</strong>. Der Villa droht der Verkauf an einen Investor und damit der Abriss. Damit würde in Würzburg noch mehr bezahlbarer Wohn- und Lebensraum verloren gehen. Nach dem Konzept des Mietshäuser-Syndikats wollen wir die Villa kaufen und so dauerhaft dem Wohnungsmarkt entziehen. <a href="#finanzierung" class="inline-link"><strong>→ Finanzierung</strong></a>
                     </p>
 
                     <p>
@@ -105,6 +105,8 @@
             <div class="aktuelles-list" id="aktuellesList">
             <p class="aktuelles-fallback">Meldungen werden geladen …</p>
          </div>
+
+         <p class="about-cta"><a href="aktuelles.html" class="button button--dark">Alle Meldungen</a></p>
 
          <p>Um über alles rund um die Villa 39 auf dem Laufenden zu bleiben, abonniere unseren <a href="#newsletter" class="inline-link"><strong>Newsletter</strong></a>!</p>
 
@@ -276,6 +278,7 @@
                 items
                     .slice()
                     .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(0, 3)
                     .forEach(item => {
                         const entry = document.createElement('article');
                         entry.className = 'aktuelles-item';
